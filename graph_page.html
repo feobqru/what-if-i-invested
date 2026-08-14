@@ -1,0 +1,39 @@
+<canvas id="myChart" style="max-width: 100%;"></canvas>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script>
+fetch('chart_data.json')
+  .then(res => res.json())
+  .then(data => {
+    new Chart(document.getElementById('myChart'), {
+      type: 'line',
+      data: {
+        labels: data.dates,
+        datasets: [
+          {
+            label: 'Predicted Value',
+            data: data.values,
+            borderColor: 'blue',
+            fill: false,
+            pointRadius: 0
+          },
+          {
+            label: `Initial $${data.purchase_price.toFixed(2)} Principal`,
+            data: data.dates.map(() => data.purchase_price),
+            borderColor: 'red',
+            borderDash: [5, 5],
+            pointRadius: 0
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: { title: { display: true, text: 'Apple Stock Closing Prices' } },
+        scales: {
+          x: { title: { display: true, text: 'Date' } },
+          y: { title: { display: true, text: 'Price (USD)' } }
+        }
+      }
+    });
+  });
+</script>
