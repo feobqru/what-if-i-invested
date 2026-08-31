@@ -1,8 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Home Page</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+
+
 <canvas id="myChart" style="max-width: 100%;"></canvas>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <script>
-fetch('get_chart_data')
+fetch('/get_chart_data')
   .then(res => res.json())
   .then(data => {
     new Chart(document.getElementById('myChart'), {
@@ -30,10 +40,19 @@ fetch('get_chart_data')
         responsive: true,
         plugins: { title: { display: true, text: 'Apple Stock Closing Prices' } },
         scales: {
-          x: { title: { display: true, text: 'Date' } },
-          y: { title: { display: true, text: 'Price (USD)' } }
+        x: {
+            ticks: { display: false }, 
+            grid: { display: true }   
+          },
+        y: {
+            grid: { display: true } 
+
         }
-      }
+        }
+        }    
     });
   });
 </script>
+
+</body>
+</html>

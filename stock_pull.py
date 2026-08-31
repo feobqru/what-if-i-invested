@@ -27,6 +27,7 @@ def handle_form():
     purchase_price = phone_received
 
     stock_data = yf.download("AAPL", start=start_date, end=end_date)
+    stock_data = stock_data.dropna()
     prices=stock_data['Close']
     initial_price = prices.iloc[0]
     shares_owned = purchase_price / initial_price
